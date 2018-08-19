@@ -8,6 +8,8 @@ const passport = require("./passport");
 const app = express();
 const PORT = 8080;
 const user = require("./routes/user");
+const photos = require("./routes/photos");
+const cors = require("cors");
 
 app.use(morgan("dev"));
 app.use(
@@ -15,6 +17,7 @@ app.use(
     extended: false
   })
 );
+app.use(cors());
 app.use(bodyParser.json());
 
 app.use(
@@ -31,6 +34,7 @@ app.use(passport.session());
 
 // Routes
 app.use("/user", user);
+app.use("/photos", photos);
 
 // Starting Server
 app.listen(PORT, () => {
